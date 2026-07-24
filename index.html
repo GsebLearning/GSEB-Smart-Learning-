@@ -1,150 +1,194 @@
 <!DOCTYPE html>
 <html lang="gu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSEB Smart Learning (Std 1 to 8)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #a8edd9, #fed6e3);
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        h1 { margin: 0; font-size: 2.2em; text-shadow: 2px 2px #ff9f43; }
+        
+        .score-board {
+            margin-top: 12px;
+            font-size: 1.2em;
+            background: #ffffff;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            color: #2f3542;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-<title>GSEB Smart Learning Portal</title>
+        .section-title {
+            color: #2e86de;
+            text-shadow: 1px 1px white;
+            margin-top: 25px;
+        }
 
-<style>
+        /* Grid for Std 1 to 8 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 18px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: 3px solid #70a1ff;
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: scale(1.08); }
+        .card-icon { font-size: 2.2em; }
+        .card-title { margin-top: 5px; color: #3742fa; font-weight: bold; }
 
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#f2f5f9;
-}
+        /* Quiz Box */
+        .quiz-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 30px auto 0 auto;
+            max-width: 600px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            border: 4px dashed #ff4757;
+        }
+        .quiz-option {
+            background: #eccc68;
+            border: none;
+            padding: 10px 20px;
+            margin: 8px;
+            font-size: 1.1em;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #2f3542;
+            transition: 0.2s;
+        }
+        .quiz-option:hover { background: #ffa502; color: white; }
 
-header{
-background:#1565C0;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-h1{
-margin:0;
-}
-
-.container{
-padding:20px;
-}
-
-.card{
-background:white;
-border-radius:15px;
-padding:20px;
-margin:15px 0;
-box-shadow:0 3px 10px rgba(0,0,0,.2);
-text-align:center;
-}
-
-button{
-background:#1565C0;
-color:white;
-border:none;
-padding:12px 25px;
-font-size:18px;
-border-radius:10px;
-cursor:pointer;
-margin-top:10px;
-}
-
-button:hover{
-background:#0D47A1;
-}
-
-footer{
-background:#1565C0;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:30px;
-}
-
-</style>
-
+        /* Media Section */
+        .media-box {
+            margin: 30px auto 0 auto;
+            max-width: 600px;
+            background: #ffffffb3;
+            padding: 15px;
+            border-radius: 20px;
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
+    <header>
+        <h1>🌟 GSEB બાળ શિક્ષણ પોર્ટલ 🚀</h1>
+        <p style="margin: 5px 0 0 0;">ધોરણ ૧ થી ૮ માટે મફત અને સરળ શિક્ષણ</p>
+    </header>
 
-<h1>📚 GSEB Smart Learning Portal</h1>
+    <div class="score-board">
+        🏆 તમારો સ્કોર: <span id="score">0</span> સ્ટાર ⭐
+    </div>
 
-<p>Std 6 • 7 • 8 Mathematics & Science</p>
+    <h2 class="section-title">📚 તમારું ધોરણ પસંદ કરો:</h2>
+    
+    <div class="grid-container">
+        <div class="card" onclick="selectClass(1)">
+            <div class="card-icon">🎈</div>
+            <div class="card-title">ધોરણ ૧</div>
+        </div>
+        <div class="card" onclick="selectClass(2)">
+            <div class="card-icon">🚀</div>
+            <div class="card-title">ધોરણ ૨</div>
+        </div>
+        <div class="card" onclick="selectClass(3)">
+            <div class="card-icon">🌟</div>
+            <div class="card-title">ધોરણ ૩</div>
+        </div>
+        <div class="card" onclick="selectClass(4)">
+            <div class="card-icon">🦁</div>
+            <div class="card-title">ધોરણ ૪</div>
+        </div>
+        <div class="card" onclick="selectClass(5)">
+            <div class="card-icon">🎓</div>
+            <div class="card-title">ધોરણ ૫</div>
+        </div>
+        <div class="card" onclick="selectClass(6)">
+            <div class="card-icon">🔬</div>
+            <div class="card-title">ધોરણ ૬</div>
+        </div>
+        <div class="card" onclick="selectClass(7)">
+            <div class="card-icon">📖</div>
+            <div class="card-title">ધોરણ ૭</div>
+        </div>
+        <div class="card" onclick="selectClass(8)">
+            <div class="card-icon">🏆</div>
+            <div class="card-title">ધોરણ ૮</div>
+        </div>
+    </div>
 
-</header>
+    <!-- Quiz Game Section -->
+    <div class="quiz-box">
+        <h2>🎮 રમત-રમતમાં જ્ઞાન (ક્વિઝ)</h2>
+        <p id="quiz-question" style="font-size: 1.3em; color: #ff4757; font-weight: bold;">ગુજરાતનું પાટનગર કયું છે?</p>
+        <div id="quiz-options">
+            <button class="quiz-option" onclick="checkAnswer(false)">અમદાવાદ</button>
+            <button class="quiz-option" onclick="checkAnswer(true)">ગાંધીનગર</button>
+            <button class="quiz-option" onclick="checkAnswer(false)">સુરત</button>
+        </div>
+        <p id="feedback" style="font-weight: bold; font-size: 1.1em;"></p>
+    </div>
 
-<div class="container">
+    <!-- Video Learning Section -->
+    <div class="media-box">
+        <h2 style="color: #ff6b6b;">📺 શૈક્ષણિક વિડીયો અને વાર્તાઓ</h2>
+        <p>બાળકો માટે ઉપયોગી વિડીયો જુઓ:</p>
+        <iframe width="100%" height="230" style="border-radius:15px; border:none;" 
+            src="https://www.youtube.com/embed/videoseries?list=PL3c8e4sB1cpxj-_s4J9H3E6I_A4aO" 
+            title="GSEB Learning Video" allowfullscreen>
+        </iframe>
+    </div>
 
-<div class="card">
+    <script>
+        let score = 0;
 
-<h2>📘 ધોરણ 6</h2>
+        function selectClass(num) {
+            alert('અભિનંદન! તમે ધોરણ ' + num + ' પસંદ કર્યું છે. આ ધોરણનું મટીરીયલ જલ્દી મુકાશે!');
+        }
 
-<p>ગણિત અને વિજ્ઞાન</p>
-
-<button onclick="alert('જલ્દી આવી રહ્યું છે')">
-Open
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📗 ધોરણ 7</h2>
-
-<p>ગણિત અને વિજ્ઞાન</p>
-
-<button onclick="alert('જલ્દી આવી રહ્યું છે')">
-Open
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📕 ધોરણ 8</h2>
-
-<p>ગણિત અને વિજ્ઞાન</p>
-
-<button onclick="alert('જલ્દી આવી રહ્યું છે')">
-Open
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📝 Quiz</h2>
-
-<p>MCQ ટેસ્ટ</p>
-
-<button onclick="alert('Quiz Soon')">
-Start Quiz
-</button>
-
-</div>
-
-<div class="card">
-
-<h2>📄 PDF Notes</h2>
-
-<p>અભ્યાસ સામગ્રી</p>
-
-<button onclick="alert('Coming Soon')">
-Open Notes
-</button>
-
-</div>
-
-</div>
-
-<footer>
-
-© 2026 GSEB Smart Learning Portal
-
-</footer>
+        function checkAnswer(isCorrect) {
+            let feedback = document.getElementById('feedback');
+            if(isCorrect) {
+                score += 10;
+                document.getElementById('score').innerText = score;
+                feedback.style.color = '#2ed573';
+                feedback.innerText = '🎉 વાહ! સાચો જવાબ છે! (+10 ⭐)';
+            } else {
+                feedback.style.color = '#ff4757';
+                feedback.innerText = '❌ અરેરે! ફરીથી પ્રયત્ન કરો.';
+            }
+        }
+    </script>
 
 </body>
-
 </html>
