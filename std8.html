@@ -34,7 +34,6 @@
 
         .container { max-width: 800px; margin: 20px auto; }
 
-        /* Grid for Subjects & Chapters */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 15px; }
         
         .box-card { 
@@ -50,7 +49,6 @@
         .box-icon { font-size: 2em; }
         .box-title { font-weight: bold; margin-top: 8px; color: #2f3542; font-size: 0.95em; }
 
-        /* Content Section */
         .content-card { 
             background: white; 
             padding: 20px; 
@@ -78,39 +76,44 @@
 
     <div class="container">
 
-        <!-- STEP 1: વિષય પસંદગી (મુખ્ય પેજ) -->
+        <!-- STEP 1: વિષય પસંદગી -->
         <div id="step-subjects">
             <h2 style="color: #ee5253;">📘 વિષય પસંદ કરો:</h2>
             <div class="grid">
                 <div class="box-card" onclick="selectSubject('science')">
-                    <div class="box-icon">🔬</div>
+                    <div class="box-icon">🧪</div>
                     <div class="box-title">વિજ્ઞાન (Science)</div>
                 </div>
                 <div class="box-card" onclick="selectSubject('maths')">
                     <div class="box-icon">📐</div>
                     <div class="box-title">ગણિત (Maths)</div>
                 </div>
+                <div class="box-card" onclick="selectSubject('ss')">
+                    <div class="box-icon">🌍</div>
+                    <div class="box-title">સામાજિક વિજ્ઞાન</div>
+                </div>
+                <div class="box-card" onclick="selectSubject('gujarati')">
+                    <div class="box-icon">📖</div>
+                    <div class="box-title">ગુજરાતી</div>
+                </div>
             </div>
         </div>
 
-        <!-- STEP 2: પ્રકરણ પસંદગી (૧૩-૧૩ પ્રકરણો) -->
+        <!-- STEP 2: પ્રકરણ પસંદગી -->
         <div id="step-chapters" class="hidden">
             <button onclick="goBackToSubjects()" class="btn-back" style="background:#ee5253; margin-bottom:15px;">⬅️ વિષય પસંદગી પર પાછા જાઓ</button>
             <h2 id="subject-title" style="color: #10ac84;">પ્રકરણ પસંદ કરો:</h2>
-            <div class="grid" id="chapter-list">
-                <!-- Chapters loaded dynamically -->
-            </div>
+            <div class="grid" id="chapter-list"></div>
         </div>
 
         <!-- STEP 3: પ્રશ્નો અને ક્વિઝ -->
         <div id="step-content" class="hidden">
-            <!-- આ બટન હવે સીધું બંને વિષય વાળા મુખ્ય પેજ પર લઈ જશે -->
-            <button onclick="goBackToSubjects()" class="btn-back" style="background:#ee5253; margin-bottom:15px;">⬅️ બંને વિષય પર પાછા જાઓ</button>
+            <button onclick="goBackToChapters()" class="btn-back" style="background:#ee5253; margin-bottom:15px;">⬅️ પ્રકરણ પસંદગી પર પાછા જાઓ</button>
             
             <div class="content-card">
                 <h2 id="chapter-heading" style="color: #ff9f43; margin-top: 0;"></h2>
                 
-                <h3>❓ ૧ ગુણના પ્રશ્નો:</h3>
+                <h3>❓ ૨૫ મહત્વના પ્રશ્ન-જવાબ:</h3>
                 <div id="qa-container"></div>
 
                 <hr style="border: 1px dashed #ccc; margin: 20px 0;">
@@ -125,41 +128,140 @@
     <script>
         let currentSubject = '';
 
-        const data = {
+        const subjectsData = {
             science: {
-                title: "🔬 વિજ્ઞાનના ૧૩ પ્રકરણો",
+                title: "🧪 વિજ્ઞાનના પ્રકરણો",
                 chapters: [
                     { id: 1, name: "પ્રકરણ ૧: પાક ઉત્પાદન અને વ્યવસ્થાપન", icon: "🌾" },
                     { id: 2, name: "પ્રકરણ ૨: સૂક્ષ્મજીવો: મિત્ર અને શત્રુ", icon: "🦠" },
-                    { id: 3, name: "પ્રકરણ ૩: કોલસો અને પેટ્રોલિયમ", icon: "🛢️" },
+                    { id: 3, name: "પ્રકરણ ૩: કોલસો અને પેટ્રોલીયમ", icon: "⛽" },
                     { id: 4, name: "પ્રકરણ ૪: દહન અને જ્યોત", icon: "🔥" },
-                    { id: 5, name: "પ્રકરણ ૫: વનસ્પતિઓ અને પ્રાણીઓનું સંરક્ષણ", icon: "🌳" },
-                    { id: 6, name: "પ્રકરણ ૬: પ્રાણીઓમાં પ્રજનન", icon: "🐣" },
-                    { id: 7, name: "પ્રકરણ ૭: તરુણાવસ્થા તરફ", icon: "🧍" },
-                    { id: 8, name: "પ્રકરણ ૮: બળ અને દબાણ", icon: "💪" },
-                    { id: 9, name: "પ્રકરણ ૯: ઘર્ષણ", icon: "🛞" },
-                    { id: 10, name: "પ્રકરણ ૧૦: ધ્વનિ", icon: "🔊" },
-                    { id: 11, name: "પ્રકરણ ૧૧: વિદ્યુતપ્રવાહની રાસાયણિક અસરો", icon: "⚡" },
-                    { id: 12, name: "પ્રકરણ ૧૨: કેટલીક નૈસર્ગિક ઘટનાઓ", icon: "🌩️" },
-                    { id: 13, name: "પ્રકરણ ૧૩: પ્રકાશ", icon: "💡" }
+                    { id: 5, name: "પ્રકરણ ૫: વનસ્પતિઓ અને પ્રાણીઓનું સંરક્ષણ", icon: "🌳" }
                 ]
             },
             maths: {
-                title: "📐 ગણિતના ૧૩ પ્રકરણો",
+                title: "📐 ગણિતના પ્રકરણો",
                 chapters: [
                     { id: 1, name: "પ્રકરણ ૧: સંમેય સંખ્યાઓ", icon: "🔢" },
-                    { id: 2, name: "પ્રકરણ ૨: એકચલ રૈખિક સમીકરણ", icon: "➕" },
-                    { id: 3, name: "પ્રકરણ ૩: ચતુષ્કોણની સમજ", icon: "🔳" },
-                    { id: 4, name: "પ્રકરણ ૪: માહિતીનું નિયમન", icon: "📊" },
-                    { id: 5, name: "પ્રકરણ ૫: વર્ગ અને વર્ગમૂળ", icon: "2️⃣" },
-                    { id: 6, name: "પ્રકરણ ૬: ઘન અને ઘનમૂળ", icon: "🧊" },
-                    { id: 7, name: "પ્રકરણ ૭: રાશિઓની સરખામણી", icon: "⚖️" },
-                    { id: 8, name: "પ્રકરણ ૮: બૈજિક પદાવલીઓ અને નિત્યસમ", icon: "✖️" },
-                    { id: 9, name: "પ્રકરણ ૯: ક્ષેત્રફળ અને ઘનફળ", icon: "📐" },
-                    { id: 10, name: "પ્રકરણ ૧૦: ઘાત અને ઘાતાંક", icon: "🔝" },
-                    { id: 11, name: "પ્રકરણ ૧૧: સમપ્રમાણ અને વ્યસ્ત પ્રમાણ", icon: "🔄" },
-                    { id: 12, name: "પ્રકરણ ૧૨: અવયવીકરણ", icon: "🧩" },
-                    { id: 13, name: "પ્રકરણ ૧૩: આલેખનો પરિચય", icon: "📈" }
+                    { id: 2, name: "પ્રકરણ ૨: એકચલ રૈખિક સમીકરણ", icon: "➕" }
+                ]
+            },
+            ss: {
+                title: "🌍 સામાજિક વિજ્ઞાનના પ્રકરણો",
+                chapters: [
+                    { id: 1, name: "પ્રકરણ ૧: ભારતમાં યુરોપિયનોનું આગમન", icon: "⛵" }
+                ]
+            },
+            gujarati: {
+                title: "📖 ગુજરાતીના પ્રકરણો",
+                chapters: [
+                    { id: 1, name: "પાઠ ૧: બજારમાં (ચિત્રપાઠ)", icon: "🛒" }
+                ]
+            }
+        };
+
+        // વિજ્ઞાનના પ્રકરણોનો ડેટાબેઝ
+        const scienceContent = {
+            1: {
+                qa: [
+                    ["૧. એક જ સ્થાન પર એક જ પ્રકારના છોડને મોટા પાયે ઉછેરવામાં આવે તેને શું કહે છે?", "પાક (Crop)"],
+                    ["૨. ભારતમાં આબોહવાકીય પરિસ્થિતિના આધારે પાકને મુખ્યત્વે કયા બે વર્ગમાં વહેંચવામાં આવે છે?", "ખરીફ પાક અને રવિ પાક"],
+                    ["૩. ચોમાસાની ઋતુમાં રોપવામાં આવતા પાકને શું કહેવાય?", "ખરીફ પાક"],
+                    ["૪. ખરીફ પાકનો સમયગાળો સામાન્ય રીતે કયો હોય છે?", "જૂનથી સપ્ટેમ્બર"],
+                    ["૫. શિયાળાની ઋતુમાં લેવામાં આવતા પાકને શું કહે છે?", "રવિ પાક"],
+                    ["૬. રવિ પાકનો સમયગાળો સામાન્ય રીતે કયો હોય છે?", "ઓક્ટોબરથી માર્ચ"],
+                    ["૭. ડાંગર, મકાઈ, સોયાબીન અને મગફળી કયા પ્રકારના પાક છે?", "ખરીફ પાક"],
+                    ["૮. ઘઉં, ચણા, વટાણા અને સરસવ કયા પ્રકારના પાક છે?", "રવિ પાક"],
+                    ["૯. જમીનને ઉપર-તળે કરવાની અને પોચી કરવાની ક્રિયાને શું કહે છે?", "ખેડાણ (Ploughing)"],
+                    ["૧૦. જમીન ખેડવા માટે કયા પરંપરાગત સાધનનો ઉપયોગ થાય છે?", "હળ (Plough)"],
+                    ["૧૧. જમીનને પોચી કરવા અને નીંદણ દૂર કરવા કયા સાધનનો ઉપયોગ થાય છે?", "ખરપિયો (Hoe)"],
+                    ["૧૨. ટ્રેક્ટર દ્વારા સંચાલિત કયા સાધન વડે ખેડાણ કરવાથી શ્રમ અને સમયની બચત થાય છે?", "દાંતિ / કલ્ટીવેટર"],
+                    ["૧૩. પાક ઉત્પાદનનો સૌથી મહત્વનો તબક્કો કયો છે?", "વાવણી (Sowing)"],
+                    ["૧૪. સરખા અંતરે અને યોગ્ય ઊંડાઈએ બીજ રોપવા માટે આધુનિક સમયમાં શાનો ઉપયોગ થાય છે?", "વાવણીયો / સીડ ડ્રીલ"],
+                    ["૧૫. વનસ્પતિના તંદુરસ્ત વિકાસ માટે જમીનમાં ઉમેરવામાં આવતા પોષક દ્રવ્યોને શું કહે છે?", "કુદરતી ખાતર અને કૃત્રિમ ખાતર"],
+                    ["૧૬. વનસ્પતિ, પ્રાણીઓના નકામા કચરાના વિઘટનથી કયું ખાતર બને છે?", "કુદરતી ખાતર"],
+                    ["૧૭. કારખાનામાં ઉત્પન્ન થતા રાસાયણિક ખાતરનું એક ઉદાહરણ આપો.", "યુરિયા / NPK / એમોનિયમ સલ્ફેટ"],
+                    ["૧૮. પાકને સમયાંતરે પાણી પૂરું પાડવાની ક્રિયાને શું કહે છે?", "સિંચાઈ (Irrigation)"],
+                    ["૧૯. સિંચાઈની કઈ આધુનિક પદ્ધતિમાં પાણીનો વ્યય સૌથી ઓછો થાય છે?", "ટપક સિંચાઈ પદ્ધતિ"],
+                    ["૨૦. અસમતલ જમીન માટે સિંચાઈની કઈ આધુનિક પદ્ધતિ ઉપયોગી છે?", "ફુવારા પદ્ધતિ"],
+                    ["૨૧. મુખ્ય પાક સાથે બિનજરૂરી ઊગી નીકળતી વનસ્પતિને શું કહે છે?", "નીંદણ (Weeds)"],
+                    ["૨૨. નીંદણ દૂર કરવાની ક્રિયાને શું કહે છે?", "નીંદામણ (Weeding)"],
+                    ["૨૩. પાક પૂર્ણ રીતે પરિપક્વ થઈ જાય ત્યારે તેને કાપવાની ક્રિયાને શું કહે છે?", "લણણી (Harvesting)"],
+                    ["૨૪. લણણી અને થ્રેશિંગ બંને કામ એકસાથે કરતું આધુનિક મશીન કયું છે?", "કમ્બાઈન મશીન"],
+                    ["૨૫. મોટા પાયે અનાજનો સંગ્રહ કરવા માટે ધાતુના ઊંચા પાત્રોને શું કહે છે?", "સાયલો (Silo)"]
+                ],
+                quiz: [
+                    { q: "૧. નીચેનામાંથી કયો રવિ પાક છે?", opts: ["ડાંગર", "ઘઉં", "મકાઈ"], ans: 1 },
+                    { q: "૨. જમીનને પોચી અને ઉપર-તળે કરવાની ક્રિયાને શું કહેવાય?", opts: ["ખેડાણ", "વાવણી", "લણણી"], ans: 0 },
+                    { q: "૩. નીંદણ દૂર કરવા માટે વપરાતું રસાયણ કયું છે?", opts: ["યુરિયા", "2,4-D", "NPK"], ans: 1 }
+                ]
+            },
+            2: {
+                qa: [
+                    ["૧. જેને માત્ર માઇક્રોસ્કોપ વડે જ જોઈ શકાય તેને શું કહે છે?", "સૂક્ષ્મજીવો"],
+                    ["૨. સૂક્ષ્મજીવોને મુખ્યત્વે કયા ૪ વર્ગોમાં વિભાજિત કરવામાં આવે છે?", "બેક્ટેરિયા, ફૂગ, પ્રજીવ અને લીલ"],
+                    ["૩. વાયરસ અન્ય સૂક્ષ્મજીવો કરતાં કઈ રીતે અલગ પડે છે?", "તે માત્ર જીવંત કોષમાં જ પ્રજનન કરે છે."],
+                    ["૪. દૂધમાંથી દહીં બનાવવામાં કયા બેક્ટેરિયા મદદ કરે છે?", "લેક્ટોબેસિલસ"],
+                    ["૫. બ્રેડ, કેક અને પેસ્ટ્રીઝ બનાવવામાં કઈ ફૂગનો ઉપયોગ થાય છે?", "ઈસ્ટ (Yeast)"],
+                    ["૬. ઈસ્ટ શર્કરાનું વિઘટન કરીને કયો ગેસ મુક્ત કરે છે?", "કાર્બન ડાયોક્સાઈડ"],
+                    ["૭. શર્કરાનું આલ્કોહોલમાં રૂપાંતર થવાની ક્રિયાને શું કહે છે?", "આથવણ (Fermentation)"],
+                    ["૮. આથવણની શોધ કયા વૈજ્ઞાનિકે કરી હતી?", "લુઈ પાશ્ચર (૧૮૫૭)"],
+                    ["૯. પેનિસિલિન નામના એન્ટિબાયોટિકની શોધ કોણે કરી હતી?", "એલેક્ઝાન્ડર ફ્લેમિંગ"],
+                    ["૧૦. બીમારી પેદા કરનારા સૂક્ષ્મજીવોનો નાશ કરતી દવાઓને શું કહે છે?", "એન્ટિબાયોટિક્સ"],
+                    ["૧૧. શીતળાની રસીની શોધ કયા વૈજ્ઞાનિકે કરી હતી?", "એડવર્ડ જેનર"],
+                    ["૧૨. વાતાવરણમાં રહેલા નાઇટ્રોજનનું જમીનમાં સ્થાપન કયા બેક્ટેરિયા કરે છે?", "રાઇઝોબિયમ"],
+                    ["૧૩. રોગકારક સૂક્ષ્મજીવોથી થતા રોગોને કેવા રોગો કહે છે?", "ચેપી રોગો"],
+                    ["૧૪. મલેરિયાના પ્રજીવનું વાહક કયું મચ્છર છે?", "માદા એનોફિલિસ મચ્છર"],
+                    ["૧૫. ડેન્ગ્યુ વાયરસના વાહક તરીકે કયું મચ્છર કાર્ય કરે છે?", "માદા એડીસ મચ્છર"],
+                    ["૧૬. ક્ષય (TB), કોલેરા અને ટાઇફોઇડ શાનાથી થતા રોગો છે?", "બેક્ટેરિયા"],
+                    ["૧૭. પોલિયો અને ઓરી શાનાથી થતા રોગો છે?", "વાયરસ"],
+                    ["૧૮. દૂધને ૭૦°C તાપમાને ૧૫ થી ૩૦ સેકન્ડ ગરમ કરીને તરત ઠંડુ કરવાની પદ્ધતિને શું કહે છે?", "પેસ્ચ્યુરાઇઝેશન"],
+                    ["૧૯. પેસ્ચ્યુરાઇઝેશનની શોધ કોણે કરી હતી?", "લુઈ પાશ્ચર"],
+                    ["૨૦. કેરીના અથાણાને બગડતું અટકાવવા શાનો ઉપયોગ થાય છે?", "મીઠું અને તેલ"],
+                    ["૨૧. જામ અને જેલીને સાચવવા માટે કયો પદાર્થ ઉમેરવામાં આવે છે?", "ખાંડ"],
+                    ["૨૨. ખોરાકને ઝેરી બનાવતા ઘટકને શું કહે છે?", "ફૂડ પોઇઝનિંગ"],
+                    ["૨૩. પેકેજ્ડ ખોરાકમાં વપરાતા કેમિકલ પ્રિઝર્વેટિવનું ઉદાહરણ આપો.", "સોડિયમ બેન્ઝોએટ"],
+                    ["૨૪. વાતાવરણમાં નાઇટ્રોજનનું પ્રમાણ કેટલા ટકા હોય છે?", "૭૮%"],
+                    ["૨૫. મશરૂમ એ કયા પ્રકારનો સૂક્ષ્મજીવ છે?", "ફૂગ"]
+                ],
+                quiz: [
+                    { q: "૧. દૂધમાંથી દહીં બનાવવામાં કયા બેક્ટેરિયા ઉપયોગી છે?", opts: ["રાઇઝોબિયમ", "લેક્ટોબેસિલસ", "ઈસ્ટ"], ans: 1 },
+                    { q: "૨. મલેરિયા માટે જવાબદાર પ્રજીવનું વાહક કયું છે?", opts: ["માદા એનોફિલિસ મચ્છર", "માખી", "વંદો"], ans: 0 },
+                    { q: "૩. પેનિસિલિનની શોધ કોણે કરી હતી?", opts: ["લુઈ પાશ્ચર", "એલેક્ઝાન્ડર ફ્લેમિંગ", "એડવર્ડ જેનર"], ans: 1 }
+                ]
+            },
+            3: {
+                qa: [
+                    ["૧. જે સંસાધનો કુદરતમાંથી મળી આવે છે તેને શું કહે છે?", "કુદરતી સંસાધનો"],
+                    ["૨. વપરાશથી ખૂટે તેમ ન હોય તેવા સંસાધનોને શું કહે છે?", "પુનઃપ્રાપ્ય કુદરતી સંસાધનો"],
+                    ["૩. મર્યાદિત જથ્થામાં હોય અને ખૂટી જાય તેવા સંસાધનોને શું કહે છે?", "પુનઃઅપ્રાપ્ય કુદરતી સંસાધનો"],
+                    ["૪. સજીવોના મૃતદેહોના અવશેષોમાંથી બનેલા બળતણને શું કહે છે?", "અશ્મિબળતણ"],
+                    ["૫. કોલસો, પેટ્રોલીયમ અને કુદરતી વાયુ કયા પ્રકારના બળતણ છે?", "અશ્મિબળતણ"],
+                    ["૬. મૃત વનસ્પતિનું કોલસામાં રૂપાંતર થવાની ક્રિયાને શું કહે છે?", "કાર્બોનાઇઝેશન"],
+                    ["૭. કોલસાના સખત અને છિદ્રાળુ ઉપપેદાશનું નામ શું છે?", "કોક (Coke)"],
+                    ["૮. સ્ટીલના ઉત્પાદનમાં શાનો ઉપયોગ થાય છે?", "કોક"],
+                    ["૯. કાળું, ઘટ્ટ અને અણગમતી વાસવાળું પ્રવાહી કયું છે?", "કોલતાર (Coal Tar)"],
+                    ["૧૦. ડામરની ગોળી શામાંથી મળે છે?", "કોલતારમાંથી"],
+                    ["૧૧. આજકાલ રોડ બનાવવા માટે કોલતારને બદલે શું વપરાય છે?", "બીટુમીન (Bitumen)"],
+                    ["૧૨. કોલસામાંથી કોક બનાવતી વખતે કયો વાયુ ઉત્પન્ન થાય છે?", "કોલગેસ"],
+                    ["૧૩. ૧૮૧૦માં લંડનમાં રસ્તાની લાઈટો માટે કયો વાયુ વપરાયો હતો?", "કોલગેસ"],
+                    ["૧૪. સમુદ્રના જીવોના અવશેષોમાંથી શાનું નિર્માણ થયું?", "પેટ્રોલીયમ અને કુદરતી વાયુ"],
+                    ["૧૫. વિશ્વનો પહેલો તેલનો કૂવો ક્યાં ખોદવામાં આવ્યો હતો?", "પેન્સિલવેનિયા (અમેરિકા)"],
+                    ["૧૬. ભારતમાં સૌથી પહેલું તેલ ક્યાં મળી આવ્યું હતું?", "માકુમ (અસમ)"],
+                    ["૧૭. પેટ્રોલીયમના ઘટકોને અલગ કરવાની ક્રિયાને શું કહે છે?", "શુદ્ધીકરણ (Refining)"],
+                    ["૧૮. પેટ્રોલીયમનું શુદ્ધીકરણ ક્યાં થાય છે?", "પેટ્રોલીયમ રિફાઇનરીમાં"],
+                    ["૧૯. LPG નું પૂરું નામ શું છે?", "લિક્વિફાઇડ પેટ્રોલીયમ ગેસ"],
+                    ["૨૦. CNG નું પૂરું નામ શું છે?", "કમ્પ્રેસ્ડ નેચરલ ગેસ"],
+                    ["૨૧. વાહનો માટે ઓછું પ્રદૂષણ કરતું સ્વચ્છ બળતણ કયું છે?", "CNG"],
+                    ["૨૨. પેટ્રોલીયમમાંથી મળતા ઉપયોગી પદાર્થોને શું કહે છે?", "પેટ્રોકેમિકલ્સ"],
+                    ["૨૩. પેટ્રોલીયમને બીજા કયા નામે ઓળખવામાં આવે છે?", "કાળું સોનું"],
+                    ["૨૪. ગુજરાતમાં કુદરતી વાયુ ક્યાંથી મળી આવ્યો છે?", "અંકલેશ્વર / ખંભાત"],
+                    ["૨૫. પેટ્રોલ-ડીઝલ બચાવવાની સલાહ આપતી સંસ્થા કઈ છે?", "PCRA"]
+                ],
+                quiz: [
+                    { q: "૧. નીચેનામાંથી કયું અશ્મિબળતણ નથી?", opts: ["કોલસો", "લાકડું", "પેટ્રોલીયમ"], ans: 1 },
+                    { q: "૨. પેટ્રોલીયમને બીજા કયા નામે ઓળખવામાં આવે છે?", opts: ["કાળું સોનું", "સફેદ સોનું", "પીળો હીરો"], ans: 0 },
+                    { q: "૩. સ્વચ્છ બળતણ તરીકે વાહનોમાં શાનો ઉપયોગ થાય છે?", opts: ["પેટ્રોલ", "CNG", "ડીઝલ"], ans: 1 }
                 ]
             }
         };
@@ -170,10 +272,10 @@
             document.getElementById('step-content').classList.add('hidden');
             document.getElementById('step-chapters').classList.remove('hidden');
             
-            document.getElementById('subject-title').innerText = data[sub].title;
+            document.getElementById('subject-title').innerText = subjectsData[sub].title;
             
             let chapterHTML = '';
-            data[sub].chapters.forEach(ch => {
+            subjectsData[sub].chapters.forEach(ch => {
                 chapterHTML += `
                     <div class="box-card" onclick="loadChapterContent(${ch.id}, '${ch.name}')">
                         <div class="box-icon">${ch.icon}</div>
@@ -186,46 +288,49 @@
         function loadChapterContent(chId, chName) {
             document.getElementById('step-chapters').classList.add('hidden');
             document.getElementById('step-content').classList.remove('hidden');
-            
             document.getElementById('chapter-heading').innerText = chName;
 
-            if(currentSubject === 'science' && chId === 1) {
-    document.getElementById('qa-container').innerHTML = `
-        <div class="qa-box"><div class="question">૧. એક જ સ્થાન પર એક જ પ્રકારના છોડને મોટા પાયે ઉછેરવામાં આવે તેને શું કહે છે?</div><div class="answer">ઉત્તર: પાક (Crop)</div></div>
-        <div class="qa-box"><div class="question">૨. ભારતમાં આબોહવાકીય પરિસ્થિતિના આધારે પાકને મુખ્યત્વે કયા બે વર્ગમાં વહેંચવામાં આવે છે?</div><div class="answer">ઉત્તર: ખરીફ પાક અને રવિ પાક</div></div>
-        <div class="qa-box"><div class="question">૩. ચોમાસાની ઋતુમાં રોપવામાં આવતા પાકને શું કહેવાય?</div><div class="answer">ઉત્તર: ખરીફ પાક</div></div>
-        <div class="qa-box"><div class="question">૪. ખરીફ પાકનો સમયગાળો સામાન્ય રીતે કયો હોય છે?</div><div class="answer">ઉત્તર: જૂનથી સપ્ટેમ્બર</div></div>
-        <div class="qa-box"><div class="question">૫. શિયાળાની ઋતુમાં લેવામાં આવતા પાકને શું કહે છે?</div><div class="answer">ઉત્તર: રવિ પાક</div></div>
-        <div class="qa-box"><div class="question">૬. રવિ પાકનો સમયગાળો સામાન્ય રીતે કયો હોય છે?</div><div class="answer">ઉત્તર: ઓક્ટોબરથી માર્ચ</div></div>
-        <div class="qa-box"><div class="question">૭. ડાંગર, મકાઈ, સોયાબીન અને મગફળી કયા પ્રકારના પાક છે?</div><div class="answer">ઉત્તર: ખરીફ પાક</div></div>
-        <div class="qa-box"><div class="question">૮. ઘઉં, ચણા, વટાણા અને સરસવ કયા પ્રકારના પાક છે?</div><div class="answer">ઉત્તર: રવિ પાક</div></div>
-        <div class="qa-box"><div class="question">૯. જમીનને ઉપર-તળે કરવાની અને પોચી કરવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: ખેડાણ (Ploughing)</div></div>
-        <div class="qa-box"><div class="question">૧૦. જમીન ખેડવા માટે કયા પરંપરાગત સાધનનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: હળ (Plough)</div></div>
-        <div class="qa-box"><div class="question">૧૧. જમીનને પોચી કરવા અને નીંદણ દૂર કરવા કયા સાધનનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: ખરપિયો (Hoe)</div></div>
-        <div class="qa-box"><div class="question">૧૨. ટ્રેક્ટર દ્વારા સંચાલિત કયા સાધન વડે ખેડાણ કરવાથી શ્રમ અને સમયની બચત થાય છે?</div><div class="answer">ઉત્તર: દાંતિ / કલ્ટીવેટર (Cultivator)</div></div>
-        <div class="qa-box"><div class="question">૧૩. પાક ઉત્પાદનનો સૌથી મહત્વનો તબક્કો કયો છે?</div><div class="answer">ઉત્તર: વાવણી (Sowing)</div></div>
-        <div class="qa-box"><div class="question">૧૪. સરખા અંતરે અને યોગ્ય ઊંડાઈએ બીજ રોપવા માટે આધુનિક સમયમાં શાનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: વાવણીયો / સીડ ડ્રીલ (Seed Drill)</div></div>
-        <div class="qa-box"><div class="question">૧૫. વનસ્પતિના તંદુરસ્ત વિકાસ માટે જમીનમાં ઉમેરવામાં આવતા પોષક દ્રવ્યોને શું કહે છે?</div><div class="answer">ઉત્તર: કુદરતી ખાતર અને કૃત્રિમ ખાતર</div></div>
-        <div class="qa-box"><div class="question">૧૬. વનસ્પતિ, પ્રાણીઓના નકામા કચરાના વિઘટનથી કયું ખાતર બને છે?</div><div class="answer">ઉત્તર: કુદરતી ખાતર (Organic Manure)</div></div>
-        <div class="qa-box"><div class="question">૧૭. કારખાનામાં ઉત્પન્ન થતા રાસાયણિક ખાતરનું એક ઉદાહરણ આપો.</div><div class="answer">ઉત્તર: યુરિયા / NPK / એમોનિયમ સલ્ફેટ</div></div>
-        <div class="qa-box"><div class="question">૧૮. પાકને અ સમયાંતરે પાણી પૂરું પાડવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: સિંચાઈ (Irrigation)</div></div>
-        <div class="qa-box"><div class="question">૧૯. સિંચાઈની કઈ આધુનિક પદ્ધતિમાં પાણીનો વ્યય સૌથી ઓછો થાય છે?</div><div class="answer">ઉત્તર: ટપક સિંચાઈ પદ્ધતિ (Drip Irrigation)</div></div>
-        <div class="qa-box"><div class="question">૨૦. અસમતલ જમીન માટે સિંચાઈની કઈ આધુનિક પદ્ધતિ ઉપયોગી છે?</div><div class="answer">ઉત્તર: ફુવારા પદ્ધતિ (Sprinkler System)</div></div>
-        <div class="qa-box"><div class="question">૨૧. મુખ્ય પાક સાથે બિનજરૂરી ઊગી નીકળતી વનસ્પતિને શું કહે છે?</div><div class="answer">ઉત્તર: નીંદણ (Weeds)</div></div>
-        <div class="qa-box"><div class="question">૨૨. નીંદણ દૂર કરવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: નીંદામણ (Weeding)</div></div>
-        <div class="qa-box"><div class="question">૨૩. પાક પૂર્ણ રીતે પરિપક્વ થઈ જાય ત્યારે તેને કાપવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: લણણી (Harvesting)</div></div>
-        <div class="qa-box"><div class="question">૨૪. લણણી અને થ્રેશિંગ બંને કામ એકસાથે કરતું આધુનિક મશીન કયું છે?</div><div class="answer">ઉત્તર: કમ્બાઈન મશીન (Combine)</div></div>
-        <div class="qa-box"><div class="question">૨૫. મોટા પાયે અનાજનો સંગ્રહ કરવા માટે ધાતુના ઊંચા પાત્રોને શું કહે છે?</div><div class="answer">ઉત્તર: સાયલો (Silo)</div></div>`;
-
-            }
-            
-            } else {
+            if (currentSubject === 'science' && scienceContent[chId]) {
+                const chapterData = scienceContent[chId];
                 
-        // સીધા વિષય વાળા મુખ્ય પેજ પર પાછા જવાનું ફંક્શન
+                // ૨૫ પ્રશ્નો ઉમેરો
+                let qaHTML = '';
+                chapterData.qa.forEach(item => {
+                    qaHTML += `
+                        <div class="qa-box">
+                            <div class="question">${item[0]}</div>
+                            <div class="answer">ઉત્તર: ${item[1]}</div>
+                        </div>`;
+                });
+                document.getElementById('qa-container').innerHTML = qaHTML;
+
+                // ક્વિઝ ઉમેરો
+                let quizHTML = '';
+                chapterData.quiz.forEach((qItem, index) => {
+                    quizHTML += `<div style="margin-bottom: 15px;"><p><b>${qItem.q}</b></p>`;
+                    qItem.opts.forEach((opt, optIdx) => {
+                        const isCorrect = (optIdx === qItem.ans);
+                        quizHTML += `<button class="quiz-opt" onclick="alert('${isCorrect ? "🎉 સાચો જવાબ!" : "❌ ખોટો જવાબ!"}')">${opt}</button> `;
+                    });
+                    quizHTML += `</div>`;
+                });
+                document.getElementById('quiz-container').innerHTML = quizHTML;
+
+            } else {
+                document.getElementById('qa-container').innerHTML = "<p>આ પ્રકરણના પ્રશ્નો અને ઉત્તરો ટૂંક સમયમાં ઉમેરવામાં આવશે!</p>";
+                document.getElementById('quiz-container').innerHTML = "<p>આ પ્રકરણની ઓનલાઇન ટેસ્ટ ટૂંક સમયમાં મુકાશે!</p>";
+            }
+        }
+
         function goBackToSubjects() {
             document.getElementById('step-chapters').classList.add('hidden');
             document.getElementById('step-content').classList.add('hidden');
             document.getElementById('step-subjects').classList.remove('hidden');
+        }
+
+        function goBackToChapters() {
+            document.getElementById('step-content').classList.add('hidden');
+            document.getElementById('step-chapters').classList.remove('hidden');
         }
     </script>
 
