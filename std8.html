@@ -189,7 +189,7 @@
             
             document.getElementById('chapter-heading').innerText = chName;
 
-            ifif(currentSubject === 'science' && chId === 1) {
+            if(currentSubject === 'science' && chId === 1) {
     document.getElementById('qa-container').innerHTML = `
         <div class="qa-box"><div class="question">૧. એક જ સ્થાન પર એક જ પ્રકારના છોડને મોટા પાયે ઉછેરવામાં આવે તેને શું કહે છે?</div><div class="answer">ઉત્તર: પાક (Crop)</div></div>
         <div class="qa-box"><div class="question">૨. ભારતમાં આબોહવાકીય પરિસ્થિતિના આધારે પાકને મુખ્યત્વે કયા બે વર્ગમાં વહેંચવામાં આવે છે?</div><div class="answer">ઉત્તર: ખરીફ પાક અને રવિ પાક</div></div>
@@ -216,10 +216,35 @@
         <div class="qa-box"><div class="question">૨૩. પાક પૂર્ણ રીતે પરિપક્વ થઈ જાય ત્યારે તેને કાપવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: લણણી (Harvesting)</div></div>
         <div class="qa-box"><div class="question">૨૪. લણણી અને થ્રેશિંગ બંને કામ એકસાથે કરતું આધુનિક મશીન કયું છે?</div><div class="answer">ઉત્તર: કમ્બાઈન મશીન (Combine)</div></div>
         <div class="qa-box"><div class="question">૨૫. મોટા પાયે અનાજનો સંગ્રહ કરવા માટે ધાતુના ઊંચા પાત્રોને શું કહે છે?</div><div class="answer">ઉત્તર: સાયલો (Silo)</div></div>`;
-                
+
+    document.getElementById('quiz-container').innerHTML = `
+        <div style="margin-bottom: 15px;">
+            <p><b>૧. નીચેનામાંથી કયો રવિ પાક છે?</b></p>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">ડાંગર</button>
+            <button class="quiz-opt" onclick="alert('🎉 સાચો જવાબ!')">ઘઉં</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">મકાઈ</button>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <p><b>૨. જમીનને પોચી અને ઉપર-તળે કરવાની ક્રિયાને શું કહેવાય?</b></p>
+            <button class="quiz-opt" onclick="alert('🎉 સાચો જવાબ!')">ખેડાણ</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">વાવણી</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">લણણી</button>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <p><b>૩. નીંદણ દૂર કરવા માટે વપરાતું રસાયણ કયું છે?</b></p>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">યુરિયા</button>
+            <button class="quiz-opt" onclick="alert('🎉 સાચો જવાબ!')">2,4-D</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">NPK</button>
+        </div>`;
+            }
+            
             } else {
                 document.getElementById('qa-container').innerHTML = "<p>આ પ્રકરણના પ્રશ્નો અને ઉત્તરો ટૂંક સમયમાં ઉમેરવામાં આવશે!</p>";
-                document.getElementById('quiz-container').innerHTML = "<p>આ પ્રકરણની ઓનલાઇન ટેસ્ટ ટૂંક સમયમાં મુકાશે!</p>"
+                document.getElementById('quiz-container').innerHTML = "<p>આ પ્રકરણની ઓનલાઇન ટેસ્ટ ટૂંક સમયમાં મુકાશે!</p>";
+            }
+        }
 
         // સીધા વિષય વાળા મુખ્ય પેજ પર પાછા જવાનું ફંક્શન
         function goBackToSubjects() {
