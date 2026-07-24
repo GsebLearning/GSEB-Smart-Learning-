@@ -1,86 +1,150 @@
 <!DOCTYPE html>
 <html lang="gu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSEB Smart Learning for Kids</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f8ff;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        .header {
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        h1 { margin: 0; font-size: 2.2em; }
-        p { font-size: 1.2em; }
-        
-        .card-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 140px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-            cursor: pointer;
-            border: 2px solid #4caf50;
-        }
-        .card:hover { transform: scale(1.05); }
-        .card h3 { color: #2e7d32; margin-bottom: 5px; }
-        
-        .btn-quiz {
-            margin-top: 30px;
-            background-color: #ff4081;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 64, 129, 0.4);
-        }
-        .btn-quiz:hover { background-color: #f50057; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GSEB Smart Learning Portal</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f2f5f9;
+}
+
+header{
+background:#1565C0;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+h1{
+margin:0;
+}
+
+.container{
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:20px;
+margin:15px 0;
+box-shadow:0 3px 10px rgba(0,0,0,.2);
+text-align:center;
+}
+
+button{
+background:#1565C0;
+color:white;
+border:none;
+padding:12px 25px;
+font-size:18px;
+border-radius:10px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+footer{
+background:#1565C0;
+color:white;
+text-align:center;
+padding:15px;
+margin-top:30px;
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <div class="header">
-        <h1>📚 GSEB Smart Learning 🎨</h1>
-        <p>રમતા રમતા શીખો - બાળ શિક્ષણ પોર્ટલ</p>
-    </div>
+<header>
 
-    <h2>તમારું ધોરણ પસંદ કરો:</h2>
+<h1>📚 GSEB Smart Learning Portal</h1>
 
-    <div class="card-container">
-        <div class="card" onclick="alert('ધોરણ ૧ નું મટીરીયલ જલ્દી આવશે!')">
-            <h3>🎈 ધોરણ ૧</h3>
-        </div>
-        <div class="card" onclick="alert('ધોરણ ૨ નું મટીરીયલ જલ્દી આવશે!')">
-            <h3>🚀 ધોરણ ૨</h3>
-        </div>
-        <div class="card" onclick="alert('ધોરણ ૩ નું મટીરીયલ જલ્દી આવશે!')">
-            <h3>🌟 ધોરણ ૩</h3>
-        </div>
-        <div class="card" onclick="alert('ધોરણ ૪ નું મટીરીયલ જલ્દી આવશે!')">
-            <h3>🏆 ધોરણ ૪</h3>
-        </div>
-    </div>
+<p>Std 6 • 7 • 8 Mathematics & Science</p>
 
-    <button class="btn-quiz" onclick="alert('ક્વિઝ રમત ટૂંક સમયમાં શરૂ થશે!')">🎮 રમો અને શીખો (Quiz)</button>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📘 ધોરણ 6</h2>
+
+<p>ગણિત અને વિજ્ઞાન</p>
+
+<button onclick="alert('જલ્દી આવી રહ્યું છે')">
+Open
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📗 ધોરણ 7</h2>
+
+<p>ગણિત અને વિજ્ઞાન</p>
+
+<button onclick="alert('જલ્દી આવી રહ્યું છે')">
+Open
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📕 ધોરણ 8</h2>
+
+<p>ગણિત અને વિજ્ઞાન</p>
+
+<button onclick="alert('જલ્દી આવી રહ્યું છે')">
+Open
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📝 Quiz</h2>
+
+<p>MCQ ટેસ્ટ</p>
+
+<button onclick="alert('Quiz Soon')">
+Start Quiz
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>📄 PDF Notes</h2>
+
+<p>અભ્યાસ સામગ્રી</p>
+
+<button onclick="alert('Coming Soon')">
+Open Notes
+</button>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 GSEB Smart Learning Portal
+
+</footer>
 
 </body>
+
 </html>
