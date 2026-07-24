@@ -1,1 +1,84 @@
 
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ધોરણ ૧ - GSEB Smart Learning</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Comic Sans MS', sans-serif; }
+        body { background: #f0f8ff; margin: 0; padding: 15px; text-align: center; }
+        header { background: #ff7e5f; color: white; padding: 15px; border-radius: 15px; }
+        .btn-back { display: inline-block; margin-top: 10px; padding: 8px 15px; background: #2e86de; color: white; text-decoration: none; border-radius: 20px; }
+        
+        .section { background: white; margin: 20px auto; padding: 20px; border-radius: 15px; max-width: 650px; text-align: left; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { color: #ff4757; border-bottom: 2px solid #f1f2f6; padding-bottom: 8px; }
+        
+        /* Q&A List */
+        .qa-item { background: #f1f2f6; padding: 10px 15px; margin: 8px 0; border-radius: 8px; border-left: 5px solid #2ed573; }
+        .question { font-weight: bold; color: #2f3542; }
+        .answer { color: #009432; margin-top: 5px; }
+
+        /* Test Box */
+        .quiz-opt { background: #70a1ff; color: white; border: none; padding: 10px 15px; margin: 5px; border-radius: 8px; cursor: pointer; font-size: 1em; }
+        .quiz-opt:hover { background: #1e90ff; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎈 ધોરણ ૧ (Class 1) 🎈</h1>
+        <a href="index.html" class="btn-back">⬅ હોમ પેજ પર પાછા જાઓ</a>
+    </header>
+
+    <!-- 1. અભ્યાસક્રમ / વિષયવસ્તુ -->
+    <div class="section">
+        <h2>📚 અભ્યાસ સામગ્રી (કલ્લોલ / ગણિત)</h2>
+        <ul>
+            <li><b>ગુજરાતી (કલ્લોલ):</b> મૂળાક્ષરો (ક થી જ્ઞ), સ્વર અને સાદા શબ્દો.</li>
+            <li><b>ગણિત:</b> ૧ થી ૨૦ સુધીની ગણતરી, આકારો અને નાનું-મોટું.</li>
+        </ul>
+    </div>
+
+    <!-- 2. એક ગુણના પ્રશ્નો (Q&A) -->
+    <div class="section">
+        <h2>❓ ૧ ગુણના અગત્યના પ્રશ્નો</h2>
+        <div class="qa-item">
+            <div class="question">પ્રશ્ન ૧: કમળનો પ્રથમ અક્ષર કયો થાય?</div>
+            <div class="answer">ઉત્તર: 'ક'</div>
+        </div>
+        <div class="qa-item">
+            <div class="question">પ્રશ્ન ૨: ૫ પછી કઈ સંખ્યા આવે?</div>
+            <div class="answer">ઉત્તર: ૬</div>
+        </div>
+        <div class="qa-item">
+            <div class="question">પ્રશ્ન ૩: આપણા બે હાથની મળીને કુલ કેટલી આંગળીઓ થાય?</div>
+            <div class="answer">ઉત્તર: ૧૦</div>
+        </div>
+    </div>
+
+    <!-- 3. ઓનલાઇન ટેસ્ટ / ક્વિઝ -->
+    <div class="section">
+        <h2>🎮 ધોરણ ૧ ઓનલાઇન ટેસ્ટ</h2>
+        <p><b>સવાલ: 'જગ' શબ્દમાં કેટલા અક્ષર છે?</b></p>
+        <button class="quiz-opt" onclick="checkTest(false)">૧</button>
+        <button class="quiz-opt" onclick="checkTest(true)">૨</button>
+        <button class="quiz-opt" onclick="checkTest(false)">૩</button>
+        <p id="res" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+
+    <script>
+        function checkTest(isCorrect) {
+            let res = document.getElementById('res');
+            if(isCorrect) {
+                res.style.color = "green";
+                res.innerText = "🎉 સાચો જવાબ! ખૂબ સરસ!";
+            } else {
+                res.style.color = "red";
+                res.innerText = "❌ ખોટો જવાબ, ફરી પ્રયત્ન કરો.";
+            }
+        }
+    </script>
+
+</body>
+</html>
