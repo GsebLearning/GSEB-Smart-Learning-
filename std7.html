@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ધોરણ ૭ - GSEB Smart Learning</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; }
+        body { background: linear-gradient(135deg, #e0f7fa, #fff9c4); margin: 0; padding: 15px; text-align: center; }
+        
+        header { 
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 20px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 { margin: 0; font-size: 1.8em; }
+        
+        .btn-back { 
+            display: inline-block; 
+            margin-top: 10px; 
+            padding: 8px 18px; 
+            background: #2e86de; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 20px; 
+            font-size: 0.95em;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+
+        .container { max-width: 800px; margin: 20px auto; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 15px; }
+        
+        .box-card { 
+            background: white; 
+            padding: 15px 10px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            cursor: pointer; 
+            border: 3px solid #ff9f43; 
+            transition: transform 0.2s; 
+        }
+        .box-card:hover { transform: scale(1.05); }
+        .box-icon { font-size: 2em; }
+        .box-title { font-weight: bold; margin-top: 8px; color: #2f3542; font-size: 0.95em; }
+
+        .content-card { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 20px; 
+            text-align: left; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-left: 6px solid #10ac84;
+        }
+
+        .qa-box { background: #f1f2f6; padding: 10px 15px; margin: 10px 0; border-radius: 10px; }
+        .question { font-weight: bold; color: #1e3799; }
+        .answer { color: #079992; margin-top: 4px; }
+
+        .quiz-opt { background: #54a0ff; color: white; border: none; padding: 8px 15px; margin: 5px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 id="header-title">📖 ધોરણ ૭ (Class 7) 📖</h1>
+        <a href="index.html" class="btn-back">🏠 મુખ્ય હોમ પેજ</a>
+    </header>
+
+    <div class="container">
+
+        <!-- STEP 1: વિષય પસંદગી -->
+        <div id="step-subjects">
+            <h2 style="color: #ee5253;">📘 વિષય પસંદ કરો:</h2>
+            <div class="grid">
+                <div class="box-card" onclick="selectSubject('science')">
+                    <div class="box-icon">🔬</div>
+                    <div class="box-title">વિજ્ઞાન (Science)</div>
+                </div>
+                <div class="box-card" onclick="selectSubject('maths')">
+                    <div class="box-icon">📐</div>
+                    <div class="box-title">ગણિત (Maths)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: પ્રકરણ પસંદગી -->
+        <div id="step-chapters" class="hidden">
+            <button onclick="goBackToSubjects()" class="btn-back" style="background:#ee5253; margin-bottom:15px;">⬅️ વિષય પસંદગી પર પાછા જાઓ</button>
+            <h2 id="subject-title" style="color: #10ac84;">પ્રકરણ પસંદ કરો:</h2>
+            <div class="grid" id="chapter-list">
+                <!-- Chapters loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- STEP 3: પ્રશ્નો અને ક્વિઝ -->
+        <div id="step-content" class="hidden">
+            <button onclick="goBackToSubjects()" class="btn-back" style="background:#ee5253; margin-bottom:15px;">⬅️ બંને વિષય પર પાછા જાઓ</button>
+            
+            <div class="content-card">
+                <h2 id="chapter-heading" style="color: #ff9f43; margin-top: 0;"></h2>
+                
+                <h3>❓ ૧ ગુણના પ્રશ્નો:</h3>
+                <div id="qa-container"></div>
+
+                <hr style="border: 1px dashed #ccc; margin: 20px 0;">
+
+                <h3>🎮 ઓનલાઇન ક્વિઝ ટેસ્ટ:</h3>
+                <div id="quiz-container"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSubject = '';
+
+        // ધોરણ ૭ વિજ્ઞાન અને ગણિતના પ્રકરણો
+        const data = {
+            science: {
+                title: "🔬 વિજ્ઞાનના પ્રકરણો",
+                chapters: [
+                    { id: 1, name: "પ્રકરણ ૧: વનસ્પતિમાં પોષણ", icon: "🌱" },
+                    { id: 2, name: "પ્રકરણ ૨: પ્રાણીઓમાં પોષણ", icon: "🦁" },
+                    { id: 3, name: "પ્રકરણ ૩: ઉષ્મા", icon: "🌡️" },
+                    { id: 4, name: "પ્રકરણ ૪: એસિડ, બેઇઝ અને ક્ષાર", icon: "🧪" },
+                    { id: 5, name: "પ્રકરણ ૫: ભૌતિક અને રાસાયણિક ફેરફારો", icon: "🔄" },
+                    { id: 6, name: "પ્રકરણ ૬: સજીવોમાં શ્વસન", icon: "🫁" },
+                    { id: 7, name: "પ્રકરણ ૭: પ્રાણીઓ અને વનસ્પતિઓમાં વહન", icon: "🩸" },
+                    { id: 8, name: "પ્રકરણ ૮: વનસ્પતિમાં પ્રજનન", icon: "🌸" },
+                    { id: 9, name: "પ્રકરણ ૯: ગતિ અને સમય", icon: "⏱️" },
+                    { id: 10, name: "પ્રકરણ ૧૦: વિદ્યુતપ્રવાહ અને તેની અસરો", icon: "⚡" },
+                    { id: 11, name: "પ્રકરણ ૧૧: પ્રકાશ", icon: "💡" },
+                    { id: 12, name: "પ્રકરણ ૧૨: જંગલો: આપણી જીવાદોરી", icon: "🌲" },
+                    { id: 13, name: "પ્રકરણ ૧૩: દૂષિત પાણીની વાર્તા", icon: "💧" }
+                ]
+            },
+            maths: {
+                title: "📐 ગણિતના પ્રકરણો",
+                chapters: [
+                    { id: 1, name: "પ્રકરણ ૧: પૂર્ણાંક સંખ્યાઓ", icon: "🔢" },
+                    { id: 2, name: "પ્રકરણ ૨: અપૂર્ણાંક અને દશાંશ સંખ્યાઓ", icon: "➗" },
+                    { id: 3, name: "પ્રકરણ ૩: માહિતીનું નિયમન", icon: "📊" },
+                    { id: 4, name: "પ્રકરણ ૪: સાદા સમીકરણ", icon: "➕" },
+                    { id: 5, name: "પ્રકરણ ૫: રેખા અને ખૂણા", icon: "📐" },
+                    { id: 6, name: "પ્રકરણ ૬: ત્રિકોણ અને તેના ગુણધર્મો", icon: "🔺" },
+                    { id: 7, name: "પ્રકરણ ૭: રાશિઓની સરખામણી", icon: "⚖️" },
+                    { id: 8, name: "પ્રકરણ ૮: સંમેય સંખ્યાઓ", icon: "🔢" },
+                    { id: 9, name: "પ્રકરણ ૯: પરિમિતિ અને ક્ષેત્રફળ", icon: "🔳" },
+                    { id: 10, name: "પ્રકરણ ૧૦: બૈજિક પદાવલી", icon: "✖️" },
+                    { id: 11, name: "પ્રકરણ ૧૧: ઘાત અને ઘાતાંક", icon: "🔝" },
+                    { id: 12, name: "પ્રકરણ ૧૨: સમમિતિ", icon: "🪞" },
+                    { id: 13, name: "પ્રકરણ ૧૩: ઘનાકારોનું પ્રત્યક્ષીકરણ", icon: "🧊" }
+                ]
+            }
+        };
+
+        function selectSubject(sub) {
+            currentSubject = sub;
+            document.getElementById('step-subjects').classList.add('hidden');
+            document.getElementById('step-content').classList.add('hidden');
+            document.getElementById('step-chapters').classList.remove('hidden');
+            
+            document.getElementById('subject-title').innerText = data[sub].title;
+            
+            let chapterHTML = '';
+            data[sub].chapters.forEach(ch => {
+                chapterHTML += `
+                    <div class="box-card" onclick="loadChapterContent(${ch.id}, '${ch.name}')">
+                        <div class="box-icon">${ch.icon}</div>
+                        <div class="box-title">${ch.name}</div>
+                    </div>`;
+            });
+            document.getElementById('chapter-list').innerHTML = chapterHTML;
+        }
+
+        function loadChapterContent(chId, chName) {
+            document.getElementById('step-chapters').classList.add('hidden');
+            document.getElementById('step-content').classList.remove('hidden');
+            
+            document.getElementById('chapter-heading').innerText = chName;
+
+            if(currentSubject === 'science' && chId === 1) {
+                document.getElementById('qa-container').innerHTML = `
+                    <div class="qa-box">
+                        <div class="question">૧. સ્વાવલંબી પોષણ એટલે શું?</div>
+                        <div class="answer">ઉત્તર: જે સજીવો પોતાનો ખોરાક જાતે બનાવે છે તે પોષણને સ્વાવલંબી પોષણ કહે છે.</div>
+                    </div>
+                    <div class="qa-box">
+                        <div class="question">૨. વનસ્પતિનું રસોડું કોને કહે છે?</div>
+                        <div class="answer">ઉત્તર: પર્ણ (પાંદડા) ને.</div>
+                    </div>`;
+
+                document.getElementById('quiz-container').innerHTML = `
+                    <p><b>સવાલ: કઈ વનસ્પતિ કીટાહારી છે?</b></p>
+                    <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">લીમડો</button>
+                    <button class="quiz-opt" onclick="alert('🎉 સાચો જવાબ!')">કળશપર્ણ</button>`;
+            } else {
+                document.getElementById('qa-container').innerHTML = "<p>આ પ્રકરણના પ્રશ્નો અને ઉત્તરો ટૂંક સમયમાં ઉમેરવામાં આવશે!</p>";
+                document.getElementById('quiz-container').innerHTML = "<p>આ પ્રકરણની ઓનલાઇન ટેસ્ટ ટૂંક સમયમાં મુકાશે!</p>";
+            }
+        }
+
+        function goBackToSubjects() {
+            document.getElementById('step-chapters').classList.add('hidden');
+            document.getElementById('step-content').classList.add('hidden');
+            document.getElementById('step-subjects').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
