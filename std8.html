@@ -183,7 +183,57 @@
             document.getElementById('chapter-list').innerHTML = chapterHTML;
         }
 
-        function loadChapterContent(chId, chName) {
+        function loadChapterContent(chId, chName)if(currentSubject === 'science' && chId === 2) {
+    document.getElementById('qa-container').innerHTML = `
+        <div class="qa-box"><div class="question">૧. જેને માત્ર માઇક્રોસ્કોપ (સૂક્ષ્મદર્શક યંત્ર) વડે જ જોઈ શકાય તેને શું કહે છે?</div><div class="answer">ઉત્તર: સૂક્ષ્મજીવો (Microorganisms)</div></div>
+        <div class="qa-box"><div class="question">૨. સૂક્ષ્મજીવોને મુખ્યત્વે કયા ૪ વર્ગોમાં વિભાજિત કરવામાં આવે છે?</div><div class="answer">ઉત્તર: બેક્ટેરિયા, ફૂગ, પ્રજીવ અને લીલ</div></div>
+        <div class="qa-box"><div class="question">૩. વાયરસ (વિષાણુ) અન્ય સૂક્ષ્મજીવો કરતાં કઈ રીતે અલગ પડે છે?</div><div class="answer">ઉત્તર: તે માત્ર યજમાન કોષ (જીવંત શરીર) માં જ પ્રજનન કરે છે.</div></div>
+        <div class="qa-box"><div class="question">૪. દૂધમાંથી દહીં બનાવવામાં કયા બેક્ટેરિયા મદદ કરે છે?</div><div class="answer">ઉત્તર: લેક્ટોબેસિલસ (Lactobacillus)</div></div>
+        <div class="qa-box"><div class="question">૫. બ્રેડ, કેક અને પેસ્ટ્રીઝ બનાવવામાં કઈ ફૂગનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: ઈસ્ટ (Yeast)</div></div>
+        <div class="qa-box"><div class="question">૬. ઈસ્ટ શર્કરાનું વિઘટન કરીને કયો ગેસ મુક્ત કરે છે?</div><div class="answer">ઉત્તર: કાર્બન ડાયોક્સાઈડ ($CO_2$)</div></div>
+        <div class="qa-box"><div class="question">૭. શર્કરાનું આલ્કોહોલમાં રૂપાંતર થવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: આથવણ (Fermentation)</div></div>
+        <div class="qa-box"><div class="question">૮. આથવણની શોધ કયા વૈજ્ઞાનિકે કરી હતી?</div><div class="answer">ઉત્તર: લુઈ પાશ્ચર (૧૮૫૭)</div></div>
+        <div class="qa-box"><div class="question">૯. પેનિસિલિન નામના એન્ટિબાયોટિકની શોધ કોણે કરી હતી?</div><div class="answer">ઉત્તર: એલેક્ઝાન્ડર ફ્લેમિંગ (૧૯૨૯)</div></div>
+        <div class="qa-box"><div class="question">૧૦. બીમારી પેદા કરનારા સૂક્ષ્મજીવોનો નાશ કરતી દવાઓને શું કહે છે?</div><div class="answer">ઉત્તર: એન્ટિબાયોટિક્સ (પ્રતિજૈવિક)</div></div>
+        <div class="qa-box"><div class="question">૧૧. શીતળાની રસીની શોધ કયા વૈજ્ઞાનિકે કરી હતી?</div><div class="answer">ઉત્તર: એડવર્ડ જેનર (૧૭૯૮)</div></div>
+        <div class="qa-box"><div class="question">૧૨. વાતાવરણમાં રહેલા નાઇટ્રોજનનું જમીનમાં સ્થાપન કયા બેક્ટેરિયા કરે છે?</div><div class="answer">ઉત્તર: રાઇઝોબિયમ (Rhizobium) અને નીલહરિત લીલ</div></div>
+        <div class="qa-box"><div class="question">૧૩. રોગકારક સૂક્ષ્મજીવોથી થતા રોગોને કેવા રોગો કહે છે?</div><div class="answer">ઉત્તર: ચેપી રોગો (Communicable diseases)</div></div>
+        <div class="qa-box"><div class="question">૧૪. મલેરિયાના પ્રજીવનું વાહક કયું મચ્છર છે?</div><div class="answer">ઉત્તર: માદા એનોફિલિસ મચ્છર</div></div>
+        <div class="qa-box"><div class="question">૧૫. ડેન્ગ્યુ વાયરસના વાહક તરીકે કયું મચ્છર કાર્ય કરે છે?</div><div class="answer">ઉત્તર: માદા એડીસ મચ્છર</div></div>
+        <div class="qa-box"><div class="question">૧૬. ક્ષય (TB), કોલેરા અને ટાઇફોઇડ શાનાથી થતા રોગો છે?</div><div class="answer">ઉત્તર: બેક્ટેરિયા</div></div>
+        <div class="qa-box"><div class="question">૧૭. પોલિયો, અડબાસિયું અને ઓરી શાનાથી થતા રોગો છે?</div><div class="answer">ઉત્તર: વાયરસ</div></div>
+        <div class="qa-box"><div class="question">૧૮. દૂધને ૭૦°C તાપમાને ૧૫ થી ૩૦ સેકન્ડ ગરમ કરીને તરત જ ઠંડુ કરવાની પદ્ધતિને શું કહે છે?</div><div class="answer">ઉત્તર: પેસ્ચ્યુરાઇઝેશન (Pasteurization)</div></div>
+        <div class="qa-box"><div class="question">૧૯. પેસ્ચ્યુરાઇઝેશનની શોધ કોણે કરી હતી?</div><div class="answer">ઉત્તર: લુઈ પાશ્ચર</div></div>
+        <div class="qa-box"><div class="question">૨૦. કેરીના અથાણાને બગડતું અટકાવવા શાનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: મીઠું અને તેલ / તેજાબ</div></div>
+        <div class="qa-box"><div class="question">૨૧. જામ અને જેલીને સાચવવા માટે કયો પદાર્થ ઉમેરવામાં આવે છે?</div><div class="answer">ઉત્તર: ખાંડ (Sugar)</div></div>
+        <div class="qa-box"><div class="question">૨૨. ખોરાકને ઝેરી (વિષાક્ત) બનાવતા ઘટકને શું કહે છે?</div><div class="answer">ઉત્તર: ફૂડ પોઇઝનિંગ (Food Poisoning)</div></div>
+        <div class="qa-box"><div class="question">૨૩. પેકેજ્ડ ખોરાકમાં બેક્ટેરિયાની વૃદ્ધિ અટકાવવા કયા રાસાયણિક પ્રિઝર્વેટિવ્સ વપરાય છે?</div><div class="answer">ઉત્તર: સોડિયમ બેન્ઝોએટ અને સોડિયમ મેટાબાયસલ્ફાઇટ</div></div>
+        <div class="qa-box"><div class="question">૨૪. વાતાવરણમાં નાઇટ્રોજનનું પ્રમાણ કેટલા ટકા હોય છે?</div><div class="answer">ઉત્તર: ૭૮%</div></div>
+        <div class="qa-box"><div class="question">૨૫. મશરૂમ એ કયા પ્રકારનો સૂક્ષ્મજીવ છે?</div><div class="answer">ઉત્તર: ફૂગ (Fungi)</div></div>`;
+
+    document.getElementById('quiz-container').innerHTML = `
+        <div style="margin-bottom: 15px;">
+            <p><b>૧. દૂધમાંથી દહીં બનાવવામાં કયા બેક્ટેરિયા ઉપયોગી છે?</b></p>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">રાઇઝોબિયમ</button>
+            <button class="quiz-opt" onclick="alert('🎉 સાચો જવાબ!')">લેક્ટોબેસિલસ</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">સ્પાઇરોગાયરા</button>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <p><b>૨. મલેરિયા રોગ માટે જવાબદાર પ્રજીવનું વાહક કયું છે?</b></p>
+            <button class="quiz-opt" onclick="alert('🎉 સાચો જવાબ!')">માદા એનોફિલિસ મચ્છર</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">માખી</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">વંદો</button>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <p><b>૩. પેનિસિલિન એન્ટિબાયોટિકની શોધ કોણે કરી હતી?</b></p>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">લુઈ પાશ્ચર</button>
+            <button class="quiz-opt" onclick="alert('🎉 સાચો જવાબ!')">એલેક્ઝાન્ડર ફ્લેમિંગ</button>
+            <button class="quiz-opt" onclick="alert('❌ ખોટો જવાબ!')">એડવર્ડ જેનર</button>
+        </div>`;
+        }
+        {
             document.getElementById('step-chapters').classList.add('hidden');
             document.getElementById('step-content').classList.remove('hidden');
             
