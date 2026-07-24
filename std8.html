@@ -190,32 +190,6 @@
             document.getElementById('chapter-heading').innerText = chName;
 
             if(currentSubject === 'science' && chId === 1) {
-    document.getElementById('qa-container').innerHTML = `
-        <div class="qa-box"><div class="question">૧. એક જ સ્થાન પર એક જ પ્રકારના છોડને મોટા પાયે ઉછેરવામાં આવે તેને શું કહે છે?</div><div class="answer">ઉત્તર: પાક (Crop)</div></div>
-        <div class="qa-box"><div class="question">૨. ભારતમાં આબોહવાકીય પરિસ્થિતિના આધારે પાકને મુખ્યત્વે કયા બે વર્ગમાં વહેંચવામાં આવે છે?</div><div class="answer">ઉત્તર: ખરીફ પાક અને રવિ પાક</div></div>
-        <div class="qa-box"><div class="question">૩. ચોમાસાની ઋતુમાં રોપવામાં આવતા પાકને શું કહેવાય?</div><div class="answer">ઉત્તર: ખરીફ પાક</div></div>
-        <div class="qa-box"><div class="question">૪. ખરીફ પાકનો સમયગાળો સામાન્ય રીતે કયો હોય છે?</div><div class="answer">ઉત્તર: જૂનથી સપ્ટેમ્બર</div></div>
-        <div class="qa-box"><div class="question">૫. શિયાળાની ઋતુમાં લેવામાં આવતા પાકને શું કહે છે?</div><div class="answer">ઉત્તર: રવિ પાક</div></div>
-        <div class="qa-box"><div class="question">૬. રવિ પાકનો સમયગાળો સામાન્ય રીતે કયો હોય છે?</div><div class="answer">ઉત્તર: ઓક્ટોબરથી માર્ચ</div></div>
-        <div class="qa-box"><div class="question">૭. ડાંગર, મકાઈ, સોયાબીન અને મગફળી કયા પ્રકારના પાક છે?</div><div class="answer">ઉત્તર: ખરીફ પાક</div></div>
-        <div class="qa-box"><div class="question">૮. ઘઉં, ચણા, વટાણા અને સરસવ કયા પ્રકારના પાક છે?</div><div class="answer">ઉત્તર: રવિ પાક</div></div>
-        <div class="qa-box"><div class="question">૯. જમીનને ઉપર-તળે કરવાની અને પોચી કરવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: ખેડાણ (Ploughing)</div></div>
-        <div class="qa-box"><div class="question">૧૦. જમીન ખેડવા માટે કયા પરંપરાગત સાધનનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: હળ (Plough)</div></div>
-        <div class="qa-box"><div class="question">૧૧. જમીનને પોચી કરવા અને નીંદણ દૂર કરવા કયા સાધનનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: ખરપિયો (Hoe)</div></div>
-        <div class="qa-box"><div class="question">૧૨. ટ્રેક્ટર દ્વારા સંચાલિત કયા સાધન વડે ખેડાણ કરવાથી શ્રમ અને સમયની બચત થાય છે?</div><div class="answer">ઉત્તર: દાંતિ / કલ્ટીવેટર (Cultivator)</div></div>
-        <div class="qa-box"><div class="question">૧૩. પાક ઉત્પાદનનો સૌથી મહત્વનો તબક્કો કયો છે?</div><div class="answer">ઉત્તર: વાવણી (Sowing)</div></div>
-        <div class="qa-box"><div class="question">૧૪. સરખા અંતરે અને યોગ્ય ઊંડાઈએ બીજ રોપવા માટે આધુનિક સમયમાં શાનો ઉપયોગ થાય છે?</div><div class="answer">ઉત્તર: વાવણીયો / સીડ ડ્રીલ (Seed Drill)</div></div>
-        <div class="qa-box"><div class="question">૧૫. વનસ્પતિના તંદુરસ્ત વિકાસ માટે જમીનમાં ઉમેરવામાં આવતા પોષક દ્રવ્યોને શું કહે છે?</div><div class="answer">ઉત્તર: કુદરતી ખાતર અને કૃત્રિમ ખાતર</div></div>
-        <div class="qa-box"><div class="question">૧૬. વનસ્પતિ, પ્રાણીઓના નકામા કચરાના વિઘટનથી કયું ખાતર બને છે?</div><div class="answer">ઉત્તર: કુદરતી ખાતર (Organic Manure)</div></div>
-        <div class="qa-box"><div class="question">૧૭. કારખાનામાં ઉત્પન્ન થતા રાસાયણિક ખાતરનું એક ઉદાહરણ આપો.</div><div class="answer">ઉત્તર: યુરિયા / NPK / એમોનિયમ સલ્ફેટ</div></div>
-        <div class="qa-box"><div class="question">૧૮. પાકને અ સમયાંતરે પાણી પૂરું પાડવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: સિંચાઈ (Irrigation)</div></div>
-        <div class="qa-box"><div class="question">૧૯. સિંચાઈની કઈ આધુનિક પદ્ધતિમાં પાણીનો વ્યય સૌથી ઓછો થાય છે?</div><div class="answer">ઉત્તર: ટપક સિંચાઈ પદ્ધતિ (Drip Irrigation)</div></div>
-        <div class="qa-box"><div class="question">૨૦. અસમતલ જમીન માટે સિંચાઈની કઈ આધુનિક પદ્ધતિ ઉપયોગી છે?</div><div class="answer">ઉત્તર: ફુવારા પદ્ધતિ (Sprinkler System)</div></div>
-        <div class="qa-box"><div class="question">૨૧. મુખ્ય પાક સાથે બિનજરૂરી ઊગી નીકળતી વનસ્પતિને શું કહે છે?</div><div class="answer">ઉત્તર: નીંદણ (Weeds)</div></div>
-        <div class="qa-box"><div class="question">૨૨. નીંદણ દૂર કરવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: નીંદામણ (Weeding)</div></div>
-        <div class="qa-box"><div class="question">૨૩. પાક પૂર્ણ રીતે પરિપક્વ થઈ જાય ત્યારે તેને કાપવાની ક્રિયાને શું કહે છે?</div><div class="answer">ઉત્તર: લણણી (Harvesting)</div></div>
-        <div class="qa-box"><div class="question">૨૪. લણણી અને થ્રેશિંગ બંને કામ એકસાથે કરતું આધુનિક મશીન કયું છે?</div><div class="answer">ઉત્તર: કમ્બાઈન મશીન (Combine)</div></div>
-        <div class="qa-box"><div class="question">૨૫. મોટા પાયે અનાજનો સંગ્રહ કરવા માટે ધાતુના ઊંચા પાત્રોને શું કહે છે?</div><div class="answer">ઉત્તર: સાયલો (Silo)</div></div>`;
 
     document.getElementById('quiz-container').innerHTML = `
         <div style="margin-bottom: 15px;">
