@@ -1455,7 +1455,9 @@
             if (currentSubject === 'science' && scienceContent[chId]) {
                 chapterData = scienceContent[chId];
             }
-    
+    if (currentSubject === 'ss' && ssContent[chId]) {
+                chapterData = ssContent[chId];
+    }
 
        if (chapterData) {
                 let qaHTML = '';
