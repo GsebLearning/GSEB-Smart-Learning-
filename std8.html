@@ -1502,11 +1502,9 @@
             if (currentSubject === 'science' && scienceContent[chId]) {
                 chapterData = scienceContent[chId];
             }
-            if (currentSubject === 'ss' && ssContent[chId]) {
-                chapterData = ssContent[chId];
-            }
+    
 
-            if (chapterData) {
+       if (chapterData) {
                 let qaHTML = '';
                 chapterData.qa.forEach(item => {
                     qaHTML += `
