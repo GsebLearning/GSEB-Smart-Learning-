@@ -1,195 +1,332 @@
-
 <!DOCTYPE html>
 <html lang="gu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSEB Smart Learning (Std 1 to 8)</title>
+    <title>તમારું ધોરણ પસંદ કરો</title>
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
-        }
-        body {
-            background: linear-gradient(135deg, #a8edd9, #fed6e3);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 15px;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(180deg, #e0f2fe 0%, #fef3c7 50%, #fce7f3 100%);
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 450px;
             text-align: center;
         }
-        header {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            color: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        h1 { margin: 0; font-size: 2.2em; text-shadow: 2px 2px #ff9f43; }
-        
-        .score-board {
-            margin-top: 12px;
-            font-size: 1.2em;
-            background: #ffffff;
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            color: #2f3542;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        .heading {
+            color: #0284c7;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .section-title {
-            color: #2e86de;
-            text-shadow: 1px 1px white;
-            margin-top: 25px;
-        }
-
-        /* Grid for Std 1 to 8 */
-        .grid-container {
+        /* Standard Grid Section */
+        .std-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-top: 15px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 25px;
         }
-        .card {
-            background: white;
-            padding: 15px;
-            border-radius: 18px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            border: 3px solid #70a1ff;
-            transition: transform 0.2s;
-        }
-        .card:hover { transform: scale(1.08); }
-        .card-icon { font-size: 2.2em; }
-        .card-title { margin-top: 5px; color: #3742fa; font-weight: bold; }
 
-        /* Quiz Box */
-        .quiz-box {
-            background: white;
-            padding: 20px;
+        .std-card {
+            background: #ffffff;
+            border: 2px solid #60a5fa;
             border-radius: 20px;
-            margin: 30px auto 0 auto;
-            max-width: 600px;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-            border: 4px dashed #ff4757;
+            padding: 15px 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .quiz-option {
-            background: #eccc68;
+
+        .std-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.15);
+        }
+
+        .std-icon {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .std-title {
+            color: #1d4ed8;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        /* Quiz Box Section */
+        .quiz-card {
+            background: #ffffff;
+            border: 3px dashed #f43f5e;
+            border-radius: 24px;
+            padding: 20px 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .quiz-header {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .quiz-question {
+            color: #ef4444;
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin-bottom: 18px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .opt-btn {
+            background-color: #f6d06f;
+            color: #27272a;
             border: none;
-            padding: 10px 20px;
-            margin: 8px;
-            font-size: 1.1em;
-            border-radius: 15px;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
             cursor: pointer;
-            font-weight: bold;
-            color: #2f3542;
-            transition: 0.2s;
+            box-shadow: 0 3px 0 #d97706;
+            transition: all 0.1s ease;
+            flex: 1;
+            min-width: 90px;
         }
-        .quiz-option:hover { background: #ffa502; color: white; }
 
-        /* Media Section */
-        .media-box {
-            margin: 30px auto 0 auto;
-            max-width: 600px;
-            background: #ffffffb3;
-            padding: 15px;
+        .opt-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 0 0 #d97706;
+        }
+
+        .opt-btn.correct {
+            background-color: #22c55e !important;
+            color: white !important;
+            box-shadow: 0 3px 0 #15803d !important;
+        }
+
+        .opt-btn.wrong {
+            background-color: #ef4444 !important;
+            color: white !important;
+            box-shadow: 0 3px 0 #b91c1c !important;
+        }
+
+        .next-btn {
+            margin-top: 15px;
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 8px 20px;
             border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Footer Banner Section */
+        .footer-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .footer-title {
+            color: #f87171;
+            font-size: 1.3rem;
+            font-weight: 800;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🌟 GSEB બાળ શિક્ષણ પોર્ટલ 🚀</h1>
-        <p style="margin: 5px 0 0 0;">ધોરણ ૧ થી ૮ માટે મફત અને સરળ શિક્ષણ</p>
-    </header>
+    <div class="main-container">
+        
+        <!-- Title -->
+        <div class="heading">
+            <span>📚</span> તમારું ધોરણ પસંદ કરો:
+        </div>
 
-    <div class="score-board">
-        🏆 તમારો સ્કોર: <span id="score">0</span> સ્ટાર ⭐
-    </div>
+        <!-- Class Grid -->
+        <div class="std-grid">
+            <div class="std-card">
+                <div class="std-icon">🎈</div>
+                <div class="std-title">ધોરણ ૧</div>
+            </div>
+            <div class="std-card">
+                <div class="std-icon">🚀</div>
+                <div class="std-title">ધોરણ ૨</div>
+            </div>
+            <div class="std-card">
+                <div class="std-icon">⭐</div>
+                <div class="std-title">ધોરણ ૩</div>
+            </div>
+            <div class="std-card">
+                <div class="std-icon">🦁</div>
+                <div class="std-title">ધોરણ ૪</div>
+            </div>
+            <div class="std-card">
+                <div class="std-icon">🎓</div>
+                <div class="std-title">ધોરણ પ</div>
+            </div>
+            <div class="std-card">
+                <div class="std-icon">🔬</div>
+                <div class="std-title">ધોરણ ૬</div>
+            </div>
+            <div class="std-card">
+                <div class="std-icon">📖</div>
+                <div class="std-title">ધોરણ ૭</div>
+            </div>
+            <div class="std-card">
+                <div class="std-icon">🏆</div>
+                <div class="std-title">ધોરણ ૮</div>
+            </div>
+        </div>
 
-    <h2 class="section-title">📚 તમારું ધોરણ પસંદ કરો:</h2>
-    
-    <div class="grid-container">
-        <div class="card" onclick="location.href='std1.html'">
-            <div class="card-icon">🎈</div>
-            <div class="card-title">ધોરણ ૧</div>
+        <!-- Dynamic Quiz Section (6 Questions) -->
+        <div class="quiz-card">
+            <div class="quiz-header">
+                <span>🎮</span> રમત-રમતમાં જ્ઞાન (ક્વિઝ)
+            </div>
+            <div class="quiz-question" id="quiz-question-text">
+                ગુજરાતનું પાટનગર કયું છે?
+            </div>
+            <div class="options-container" id="options-container">
+                <!-- Options rendered via JS -->
+            </div>
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">આગળનો પ્રશ્ન ➡️</button>
         </div>
-        <div class="card" onclick="location.href='std2.html'">
-            <div class="card-icon">🚀</div>
-            <div class="card-title">ધોરણ ૨</div>
-        </div>
-        <div class="card" onclick="location.href='std3.html'">
-            <div class="card-icon">🌟</div>
-            <div class="card-title">ધોરણ ૩</div>
-        </div>
-        <div class="card" onclick="location.href='std4.html'">
-            <div class="card-icon">🦁</div>
-            <div class="card-title">ધોરણ ૪</div>
-        </div>
-        <div class="card" onclick="location.href='std5.html'">
-            <div class="card-icon">🎓</div>
-            <div class="card-title">ધોરણ ૫</div>
-        </div>
-        <div class="card" onclick="location.href='std6.html'">
-            <div class="card-icon">🔬</div>
-            <div class="card-title">ધોરણ ૬</div>
-        </div>
-        <div class="card" onclick="location.href='std7.html'">
-            <div class="card-icon">📖</div>
-            <div class="card-title">ધોરણ ૭</div>
-        </div>
-        <div class="card" onclick="location.href='std8.html'">
-            <div class="card-icon">🏆</div>
-            <div class="card-title">ધોરણ ૮</div>
-        </div>
-    </div>
 
-    <!-- Quiz Game Section -->
-    <div class="quiz-box">
-        <h2>🎮 રમત-રમતમાં જ્ઞાન (ક્વિઝ)</h2>
-        <p id="quiz-question" style="font-size: 1.3em; color: #ff4757; font-weight: bold;">ગુજરાતનું પાટનગર કયું છે?</p>
-        <div id="quiz-options">
-            <button class="quiz-option" onclick="checkAnswer(false)">અમદાવાદ</button>
-            <button class="quiz-option" onclick="checkAnswer(true)">ગાંધીનગર</button>
-            <button class="quiz-option" onclick="checkAnswer(false)">સુરત</button>
+        <!-- Footer Section -->
+        <div class="footer-card">
+            <span style="font-size: 1.8rem;">📺</span>
+            <div class="footer-title">શૈક્ષણિક વિડીયો અને વાર્તાઓ</div>
         </div>
-        <p id="feedback" style="font-weight: bold; font-size: 1.1em;"></p>
-    </div>
 
-    <!-- Video Learning Section -->
-    <div class="media-box">
-        <h2 style="color: #ff6b6b;">📺 શૈક્ષણિક વિડીયો અને વાર્તાઓ</h2>
-        <p>બાળકો માટે ઉપયોગી વિડીયો જુઓ:</p>
-        <iframe width="100%" height="230" style="border-radius:15px; border:none;" 
-            src="https://www.youtube.com/embed/videoseries?list=PL3c8e4sB1cpxj-_s4J9H3E6I_A4aO" 
-            title="GSEB Learning Video" allowfullscreen>
-        </iframe>
     </div>
 
     <script>
-        let score = 0;
-
-        function selectClass(num) {
-            alert('અભિનંદન! તમે ધોરણ ' + num + ' પસંદ કર્યું છે. આ ધોરણનું મટીરીયલ જલ્દી મુકાશે!');
-        }
-
-        function checkAnswer(isCorrect) {
-            let feedback = document.getElementById('feedback');
-            if(isCorrect) {
-                score += 10;
-                document.getElementById('score').innerText = score;
-                feedback.style.color = '#2ed573';
-                feedback.innerText = '🎉 વાહ! સાચો જવાબ છે! (+10 ⭐)';
-            } else {
-                feedback.style.color = '#ff4757';
-                feedback.innerText = '❌ અરેરે! ફરીથી પ્રયત્ન કરો.';
+        // 6 Questions Array
+        const quizData = [
+            {
+                q: "૧. ગુજરાતનું પાટનગર કયું છે?",
+                opts: ["અમદાવાદ", "ગાંધીનગર", "સુરત"],
+                ans: 1
+            },
+            {
+                q: "૨. ભારતનો રાષ્ટ્રીય પક્ષી કયો છે?",
+                opts: ["મોર", "પોપટ", "કબૂતર"],
+                ans: 0
+            },
+            {
+                q: "૩. સૂર્ય કઈ દિશામાં ઉગે છે?",
+                opts: ["પશ્ચિમ", "ઉત્તર", "પૂર્વ"],
+                ans: 2
+            },
+            {
+                q: "૪. એક અઠવાડિયામાં કેટલા દિવસ હોય છે?",
+                opts: ["૫", "૭", "૧૦"],
+                ans: 1
+            },
+            {
+                q: "૫. જંગલનો રાજા કોણ ગણાય છે?",
+                opts: ["વાઘ", "વરુ", "સિંહ"],
+                ans: 2
+            },
+            {
+                q: "૬. આપણા દેશનું નામ શું છે?",
+                opts: ["ભારત", "નેપાળ", "શ્રીલંકા"],
+                ans: 0
             }
-        }
-    </script>
+        ];
 
+        let currentIdx = 0;
+
+        function loadQuestion() {
+            const currentQuiz = quizData[currentIdx];
+            document.getElementById('quiz-question-text').innerText = currentQuiz.q;
+            
+            const optContainer = document.getElementById('options-container');
+            optContainer.innerHTML = '';
+            document.getElementById('next-btn').style.display = 'none';
+
+            currentQuiz.opts.forEach((optText, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = optText;
+                btn.onclick = () => checkAnswer(btn, index, currentQuiz.ans);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedBtn, selectedIdx, correctIdx) {
+            const buttons = document.querySelectorAll('.opt-btn');
+            
+            // Disable all buttons once an option is picked
+            buttons.forEach(btn => btn.onclick = null);
+
+            if (selectedIdx === correctIdx) {
+                selectedBtn.classList.add('correct');
+            } else {
+                selectedBtn.classList.add('wrong');
+                buttons[correctIdx].classList.add('correct');
+            }
+
+            // Show Next button or restart option
+            const nextBtn = document.getElementById('next-btn');
+            if (currentIdx < quizData.length - 1) {
+                nextBtn.innerText = 'આગળનો પ્રશ્ન ➡️';
+            } else {
+                nextBtn.innerText = 'ફરીથી રમો 🔄';
+            }
+            nextBtn.style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx >= quizData.length) {
+                currentIdx = 0; // Loop back to first question
+            }
+            loadQuestion();
+        }
+
+        // Initialize quiz
+        loadQuestion();
+    </script>
 </body>
 </html>
