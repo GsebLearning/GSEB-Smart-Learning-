@@ -167,7 +167,8 @@
 },
             ss: {
                 title: "🌍 સામાજિક વિજ્ઞાનના પ્રકરણો",
-                chapters: [{ id: 1, name: "પ્રકરણ ૧: ભારતમાં યુરોપિયનો અને અંગ્રેજી શાસન", icon: "⛵" },
+                chapters: [
+            { id: 1, name: "પ્રકરણ ૧: ભારતમાં યુરોપિયનો અને અંગ્રેજી શાસન", icon: "⛵" },
             { id: 2, name: "પ્રકરણ ૨: ભારતમાં બ્રિટિશ શાસન (૧૭૫૭ થી ૧૮૫૭)", icon: "🏛️" },
             { id: 3, name: "પ્રકરણ ૩: ભારતનો પ્રથમ સ્વાતંત્ર્ય સંગ્રામ (૧૮૫૭)", icon: "⚔️" },
             { id: 4, name: "પ્રકરણ ૪: અંગ્રેજ સમયના ભારતીય ઉદ્યોગો અને ગૃહઉદ્યોગો", icon: "🧵" },
@@ -181,7 +182,7 @@
             { id: 12, name: "પ્રકરણ ૧૨: ઉદ્યોગ", icon: "🏭" },
             { id: 13, name: "પ્રકરણ ૧૩: માનવ સંસાધન", icon: "👥" }
         ]
-            },
+      },
             gujarati: {
                 title: "📖 ગુજરાતીના પ્રકરણો",
                 chapters: [{ id: 1, name: "પાઠ ૧: બજારમાં (ચિત્રપાઠ)", icon: "🛒" }]
@@ -1085,9 +1086,6 @@
             if (currentSubject === 'science' && scienceContent[chId]) {
                 chapterData = scienceContent[chId];
             }
-    if (currentSubject === 'ss' && ssContent[chId]) {
-                chapterData = ssContent[chId];
-    }
 
        if (chapterData) {
                 let qaHTML = '';
