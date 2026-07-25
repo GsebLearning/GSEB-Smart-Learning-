@@ -75,12 +75,6 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
             border: 4px dashed #ff4757;
         }
-        
-        .quiz-image {
-            font-size: 5rem;
-            margin: 10px 0;
-        }
-
         .quiz-option {
             background: #eccc68;
             border: none;
@@ -94,19 +88,6 @@
             transition: 0.2s;
         }
         .quiz-option:hover { background: #ffa502; color: white; }
-
-        .next-btn {
-            background: #2e86de;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            font-size: 1.1em;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-top: 15px;
-            font-weight: bold;
-            display: none;
-        }
 
         /* Media Section */
         .media-box {
@@ -132,58 +113,50 @@
     <h2 class="section-title">📚 તમારું ધોરણ પસંદ કરો:</h2>
     
     <div class="grid-container">
-        <div class="card" onclick="selectClass(1)">
+        <div class="card" onclick="location.href='std1.html'">
             <div class="card-icon">🎈</div>
             <div class="card-title">ધોરણ ૧</div>
         </div>
-        <div class="card" onclick="selectClass(2)">
+        <div class="card" onclick="location.href='std2.html'">
             <div class="card-icon">🚀</div>
             <div class="card-title">ધોરણ ૨</div>
         </div>
-        <div class="card" onclick="selectClass(3)">
+        <div class="card" onclick="location.href='std3.html'">
             <div class="card-icon">🌟</div>
             <div class="card-title">ધોરણ ૩</div>
         </div>
-        <div class="card" onclick="selectClass(4)">
+        <div class="card" onclick="location.href='std4.html'">
             <div class="card-icon">🦁</div>
             <div class="card-title">ધોરણ ૪</div>
         </div>
-        <div class="card" onclick="selectClass(5)">
+        <div class="card" onclick="location.href='std5.html'">
             <div class="card-icon">🎓</div>
             <div class="card-title">ધોરણ ૫</div>
         </div>
-        <div class="card" onclick="selectClass(6)">
+        <div class="card" onclick="location.href='std6.html'">
             <div class="card-icon">🔬</div>
             <div class="card-title">ધોરણ ૬</div>
         </div>
-        <div class="card" onclick="selectClass(7)">
+        <div class="card" onclick="location.href='std7.html'">
             <div class="card-icon">📖</div>
             <div class="card-title">ધોરણ ૭</div>
         </div>
-        <div class="card" onclick="selectClass(8)">
+        <div class="card" onclick="location.href='std8.html'">
             <div class="card-icon">🏆</div>
             <div class="card-title">ધોરણ ૮</div>
         </div>
     </div>
 
-    <!-- Quiz Game Section (With Pictures) -->
+    <!-- Quiz Game Section -->
     <div class="quiz-box">
-        <h2>🎮 ચિત્ર જોઈને સાચું નામ ઓળખો</h2>
-        
-        <!-- Large Picture Display -->
-        <div id="quiz-image" class="quiz-image">🍎</div>
-        
-        <p id="quiz-question" style="font-size: 1.3em; color: #ff4757; font-weight: bold;">
-            આ ચિત્ર શેનું છે?
-        </p>
-        
+        <h2>🎮 રમત-રમતમાં જ્ઞાન (ક્વિઝ)</h2>
+        <p id="quiz-question" style="font-size: 1.3em; color: #ff4757; font-weight: bold;">ગુજરાતનું પાટનગર કયું છે?</p>
         <div id="quiz-options">
-            <!-- Options dynamically loaded -->
+            <button class="quiz-option" onclick="checkAnswer(false)">અમદાવાદ</button>
+            <button class="quiz-option" onclick="checkAnswer(true)">ગાંધીનગર</button>
+            <button class="quiz-option" onclick="checkAnswer(false)">સુરત</button>
         </div>
-
-        <p id="feedback" style="font-weight: bold; font-size: 1.1em; min-height: 25px; margin-top: 10px;"></p>
-        
-        <button id="next-btn" class="next-btn" onclick="nextQuestion()">આગળનો પ્રશ્ન ➡️</button>
+        <p id="feedback" style="font-weight: bold; font-size: 1.1em;"></p>
     </div>
 
     <!-- Video Learning Section -->
@@ -198,98 +171,23 @@
 
     <script>
         let score = 0;
-        let currentIdx = 0;
-
-        // 6 Picture Questions
-        const quizData = [
-            {
-                img: "🍎",
-                q: "૧. આપેલ ચિત્ર ઓળખી તેનું નામ જણાવો:",
-                opts: ["સફરજન", "કેળું", "કેરી"],
-                ans: 0
-            },
-            {
-                img: "🐘",
-                q: "૨. આ કયું પ્રાણી છે?",
-                opts: ["ઊંટ", "હાથી", "ઘોડો"],
-                ans: 1
-            },
-            {
-                img: "🦁",
-                q: "૩. જંગલના રાજાનું ચિત્ર ઓળખો:",
-                opts: ["વાઘ", "ચિત્તો", "સિંહ"],
-                ans: 2
-            },
-            {
-                img: "🌻",
-                q: "૪. આ કયું ફૂલ છે?",
-                opts: ["સૂર્યમુખી", "ગુલાબ", "કમળ"],
-                ans: 0
-            },
-            {
-                img: "🚗",
-                q: "૫. આ કયું વાહન છે?",
-                opts: ["બસ", "કાર", "સાયકલ"],
-                ans: 1
-            },
-            {
-                img: "🌙",
-                q: "૬. રાત્રે આકાશમાં શું દેખાય છે?",
-                opts: ["સૂર્ય", "વાદળ", "ચાંદો (ચંદ્ર)"],
-                ans: 2
-            }
-        ];
 
         function selectClass(num) {
             alert('અભિનંદન! તમે ધોરણ ' + num + ' પસંદ કર્યું છે. આ ધોરણનું મટીરીયલ જલ્દી મુકાશે!');
         }
 
-        function loadQuiz() {
-            const quiz = quizData[currentIdx];
-            document.getElementById('quiz-image').innerText = quiz.img;
-            document.getElementById('quiz-question').innerText = quiz.q;
-            
-            const optionsBox = document.getElementById('quiz-options');
-            optionsBox.innerHTML = '';
-            document.getElementById('feedback').innerText = '';
-            document.getElementById('next-btn').style.display = 'none';
-
-            quiz.opts.forEach((optText, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option';
-                btn.innerText = optText;
-                btn.onclick = () => checkAnswer(index, quiz.ans);
-                optionsBox.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(selected, correct) {
+        function checkAnswer(isCorrect) {
             let feedback = document.getElementById('feedback');
-            const buttons = document.querySelectorAll('.quiz-option');
-            
-            // Disable buttons after selection
-            buttons.forEach(b => b.onclick = null);
-
-            if(selected === correct) {
+            if(isCorrect) {
                 score += 10;
                 document.getElementById('score').innerText = score;
                 feedback.style.color = '#2ed573';
                 feedback.innerText = '🎉 વાહ! સાચો જવાબ છે! (+10 ⭐)';
             } else {
                 feedback.style.color = '#ff4757';
-                feedback.innerText = '❌ ખોટો જવાબ! સાચો જવાબ: ' + quizData[currentIdx].opts[correct];
+                feedback.innerText = '❌ અરેરે! ફરીથી પ્રયત્ન કરો.';
             }
-
-            document.getElementById('next-btn').style.display = 'inline-block';
         }
-
-        function nextQuestion() {
-            currentIdx = (currentIdx + 1) % quizData.length;
-            loadQuiz();
-        }
-
-        // Initialize First Question
-        loadQuiz();
     </script>
 
 </body>
